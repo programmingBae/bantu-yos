@@ -81,6 +81,9 @@ export default function Home() {
       </table>
       {data.length === 0 && <p>Loading data...</p>}
       <style jsx>{`
+        .table-container {
+          overflow-x: auto;
+        }
         table {
           border-collapse: collapse;
           width: 100%;
@@ -97,6 +100,15 @@ export default function Home() {
           border: none;
           background-color: transparent;
           cursor: pointer;
+        }
+        @media only screen and (max-width: 768px) {
+          table {
+            font-size: 14px;
+          }
+          th,
+          td {
+            padding: 6px;
+          }
         }
       `}</style>
     </div>
