@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Table</h1>
+      <h1>SMANSA SCORE</h1>
       <table>
         <thead>
           <tr>
