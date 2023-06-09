@@ -1,5 +1,7 @@
 "use client"; 
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -94,6 +96,7 @@ export default function Home() {
   }
 
   return (
+   
     <div>
       <h1>SMA SCORE</h1>
       <h2>Please open the website using desktop (laptop, pc, etc) and dont translate the page for the best experience.</h2>
@@ -149,6 +152,7 @@ export default function Home() {
           ))}
         </tbody>
       </table>
+      <Analytics />
       </div>
       {data.length === 0 && !isLoading && <p>No data available.</p>}
       {isLoading && <p>Loading data...</p>}
