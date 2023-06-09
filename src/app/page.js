@@ -96,6 +96,7 @@ export default function Home() {
   return (
     <div>
       <h1>SMA SCORE</h1>
+      <h2>Please open the website using desktop (laptop, pc, etc) and dont translate the page for the best experience.</h2>
       <div className="button-container" style={{justifyContent: 'space-between'}}>
       <button onMouseOut={MouseOut} onMouseOver={MouseOver} onClick={fetchData} disabled={isLoading} style={{padding: '1rem', backgroundColor: 'black', color: 'white'}}>
           {isLoading ? 'Loading...' : 'SMAN 1'}
