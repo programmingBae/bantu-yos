@@ -45,6 +45,7 @@ export default function Home() {
       <table>
         <thead>
           <tr>
+          <th>#</th>
             <th>Registration Number</th>
             {/* <th>Distance 1</th>
             <th>Distance 2</th>
@@ -63,6 +64,7 @@ export default function Home() {
         <tbody>
           {sortedData.map((item, index) => (
             <tr key={index}>
+               <td>{index + 1}</td>
               <td>{item.registration_number}</td>
               {/* <td>{item.distance1.toFixed(2)}</td>
               <td>{item.distance2.toFixed(2)}</td>
