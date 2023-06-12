@@ -129,9 +129,10 @@ export default function Home() {
                 {sortDirection === 'asc' ? '↑' : '↓'}
               </button>
             </th>
-            <th>School</th>
-            <th>Name</th>
+            {/* <th>School</th>
+            <th>Name</th> */}
             <th>First Option</th>
+            <th>Second Option</th>
           </tr>
         </thead>
         <tbody>
@@ -145,9 +146,10 @@ export default function Home() {
                 {item.distance3 === 99999 ? '-' : item.distance3.toFixed(2)}
               </td> */}
               <td>{item.score.toFixed(2)}</td>
-              <td>{item.school}</td>
-              <td>{item.name}</td>
+              {/* <td>{item.school}</td>
+              <td>{item.name}</td> */}
               <td>{item.first_option.name}</td>
+              <td>{item.second_option.name}</td>
             </tr>
           ))}
         </tbody>
