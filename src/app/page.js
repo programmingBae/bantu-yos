@@ -22,8 +22,10 @@ export default function Home() {
       const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=200&pagination=false&orderby=created_at&order=asc&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224113&filters[1][key]=option_type&filters[1][value]=prestasi-rapor&filters[2][key]=first_option.major_id&filters[2][value]=');
       const jsonData = await response.json();
       setData(jsonData.result.itemsList);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setIsLoading(false);
     }
   }
 
@@ -129,8 +131,8 @@ export default function Home() {
                 {sortDirection === 'asc' ? '↑' : '↓'}
               </button>
             </th>
-            {/* <th>School</th>
-            <th>Name</th> */}
+            <th>School</th>
+            <th>Name</th>
             <th>First Option</th>
             <th>Second Option</th>
           </tr>
@@ -146,10 +148,10 @@ export default function Home() {
                 {item.distance3 === 99999 ? '-' : item.distance3.toFixed(2)}
               </td> */}
               <td>{item.score.toFixed(2)}</td>
-              {/* <td>{item.school}</td>
-              <td>{item.name}</td> */}
+              <td>{item.school}</td>
+              <td>{item.name}</td>
               <td>{item.first_option.name}</td>
-              <td>{item.second_option.name}</td>
+              <td>{item.second_option?.name}</td>
             </tr>
           ))}
         </tbody>
