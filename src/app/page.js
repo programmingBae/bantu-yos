@@ -19,7 +19,7 @@ export default function Home() {
 
   async function fetchData() {
     try {
-      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=200&pagination=false&orderby=created_at&order=asc&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224113&filters[1][key]=option_type&filters[1][value]=prestasi-rapor&filters[2][key]=first_option.major_id&filters[2][value]=');
+      const response = await fetch('https://api-v2.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&orderby=created_at&order=asc&pagination=false&columns[0][key]=name&columns[0][searchable]=false&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224113&filters[1][key]=option_type&filters[1][value]=zonasi&filters[2][key]=first_option.major_id&filters[2][value]=');
       const jsonData = await response.json();
       setData(jsonData.result.itemsList);
       setIsLoading(false);
@@ -32,7 +32,7 @@ export default function Home() {
   async function fetchNewData() {
     try {
       setIsLoading(true);
-      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224112&filters[1][key]=option_type&filters[1][value]=prestasi-rapor&filters[2][key]=first_option.major_id&filters[2][value]=');
+      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224112&filters[1][key]=option_type&filters[1][value]=zonasi&filters[2][key]=first_option.major_id&filters[2][value]=');
       const newData = await response.json();
       setData(newData.result.itemsList);
       setIsLoading(false);
@@ -45,7 +45,7 @@ export default function Home() {
   async function fetchNewDataSman3() {
     try {
       setIsLoading(true);
-      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224114&filters[1][key]=option_type&filters[1][value]=prestasi-rapor&filters[2][key]=first_option.major_id&filters[2][value]=');
+      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224114&filters[1][key]=option_type&filters[1][value]=zonasi&filters[2][key]=first_option.major_id&filters[2][value]=');
       const newData = await response.json();
       setData(newData.result.itemsList);
       setIsLoading(false);
@@ -58,7 +58,7 @@ export default function Home() {
   async function fetchNewDataSman2() {
     try {
       setIsLoading(true);
-      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224139&filters[1][key]=option_type&filters[1][value]=prestasi-rapor&filters[2][key]=first_option.major_id&filters[2][value]=');
+      const response = await fetch('https://api.ppdb.jabarprov.go.id/portal/registrant?page=1&limit=500&pagination=false&columns[0][key]=name&columns[0][searchable]=true&columns[1][key]=registration_number&columns[1][searchable]=true&filters[0][key]=first_school.npsn&filters[0][value]=20224139&filters[1][key]=option_type&filters[1][value]=zonasi&filters[2][key]=first_option.major_id&filters[2][value]=');
       const newData = await response.json();
       setData(newData.result.itemsList);
       setIsLoading(false);
@@ -75,9 +75,9 @@ export default function Home() {
   function sortData() {
     const sorted = [...data].sort((a, b) => {
       if (sortDirection === 'asc') {
-        return a.score - b.score;
+        return a.distance1 - b.distance1;
       } else {
-        return b.score - a.score;
+        return b.distance1 - a.distance1;
       }
     });
     setSortedData(sorted);
@@ -125,15 +125,15 @@ export default function Home() {
             {/* <th>Distance 1</th>
             <th>Distance 2</th>
             <th>Distance 3</th> */}
+
+            <th>School</th>
+            <th>Name</th>
             <th>
-              Score{' '}
+              First Option{' '}
               <button onClick={handleSortToggle}>
                 {sortDirection === 'asc' ? '↑' : '↓'}
               </button>
-            </th>
-            <th>School</th>
-            <th>Name</th>
-            <th>First Option</th>
+              </th>
             <th>Second Option</th>
           </tr>
         </thead>
@@ -147,11 +147,10 @@ export default function Home() {
               <td>
                 {item.distance3 === 99999 ? '-' : item.distance3.toFixed(2)}
               </td> */}
-              <td>{item.score.toFixed(2)}</td>
               <td>{item.school}</td>
               <td>{item.name}</td>
-              <td>{item.first_option.name}</td>
-              <td>{item.second_option?.name}</td>
+              <td>{item.first_option.name+' ('+item.distance1+')'}</td>
+              <td>{item.second_option?.name+' ('+item.distance2+')'}</td>
             </tr>
           ))}
         </tbody>
